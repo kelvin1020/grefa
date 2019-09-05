@@ -1,0 +1,41 @@
+        Fp*(-2*C2\[Beta]*Cos(2*\[Phi]) - 2*C2\[Beta]*Ci**2*Cos(2*\[Phi]) - 2*S2\[Beta]*Sin(2*\[Phi]) - 2*Ci**2*S2\[Beta]*Sin(2*\[Phi]) + 
+     -    e**6*((65*C2\[Beta]*Cos(2*\[Phi]))/144. + (65*C2\[Beta]*Ci**2*Cos(2*\[Phi]))/144. + (11*C2\[Beta]*Cos(4*\[Phi] - 6*Derivative(1)(\[Phi])))/90. + 
+     -       (11*C2\[Beta]*Ci**2*Cos(4*\[Phi] - 6*Derivative(1)(\[Phi])))/90. + (81*Si**2*Cos(6*\[Phi] - 6*Derivative(1)(\[Phi])))/40. - (2048*C2\[Beta]*Cos(8*\[Phi] - 6*Derivative(1)(\[Phi])))/45. - 
+     -       (2048*C2\[Beta]*Ci**2*Cos(8*\[Phi] - 6*Derivative(1)(\[Phi])))/45. + (11*C2\[Beta]*Cos(2*\[Phi] - 4*Derivative(1)(\[Phi])))/240. + 
+     -       (11*C2\[Beta]*Ci**2*Cos(2*\[Phi] - 4*Derivative(1)(\[Phi])))/240. - (16*Si**2*Cos(4*\[Phi] - 4*Derivative(1)(\[Phi])))/15. + 
+     -       (2349*C2\[Beta]*Cos(6*\[Phi] - 4*Derivative(1)(\[Phi])))/40. + (2349*C2\[Beta]*Ci**2*Cos(6*\[Phi] - 4*Derivative(1)(\[Phi])))/40. + (Si**2*Cos(2*\[Phi] - 2*Derivative(1)(\[Phi])))/24. - 
+     -       (101*C2\[Beta]*Cos(4*\[Phi] - 2*Derivative(1)(\[Phi])))/6. - (101*C2\[Beta]*Ci**2*Cos(4*\[Phi] - 2*Derivative(1)(\[Phi])))/6. + (65*S2\[Beta]*Sin(2*\[Phi]))/144. + 
+     -       (65*Ci**2*S2\[Beta]*Sin(2*\[Phi]))/144. - (11*S2\[Beta]*Sin(4*\[Phi] - 6*Derivative(1)(\[Phi])))/90. - (11*Ci**2*S2\[Beta]*Sin(4*\[Phi] - 6*Derivative(1)(\[Phi])))/90. - 
+     -       (2048*S2\[Beta]*Sin(8*\[Phi] - 6*Derivative(1)(\[Phi])))/45. - (2048*Ci**2*S2\[Beta]*Sin(8*\[Phi] - 6*Derivative(1)(\[Phi])))/45. - 
+     -       (11*S2\[Beta]*Sin(2*\[Phi] - 4*Derivative(1)(\[Phi])))/240. - (11*Ci**2*S2\[Beta]*Sin(2*\[Phi] - 4*Derivative(1)(\[Phi])))/240. + (2349*S2\[Beta]*Sin(6*\[Phi] - 4*Derivative(1)(\[Phi])))/40. + 
+     -       (2349*Ci**2*S2\[Beta]*Sin(6*\[Phi] - 4*Derivative(1)(\[Phi])))/40. - (101*S2\[Beta]*Sin(4*\[Phi] - 2*Derivative(1)(\[Phi])))/6. - 
+     -       (101*Ci**2*S2\[Beta]*Sin(4*\[Phi] - 2*Derivative(1)(\[Phi])))/6.) + 
+     -    e**2*(5*C2\[Beta]*Cos(2*\[Phi]) + 5*C2\[Beta]*Ci**2*Cos(2*\[Phi]) + Si**2*Cos(2*\[Phi] - 2*Derivative(1)(\[Phi])) - 8*C2\[Beta]*Cos(4*\[Phi] - 2*Derivative(1)(\[Phi])) - 
+     -       8*C2\[Beta]*Ci**2*Cos(4*\[Phi] - 2*Derivative(1)(\[Phi])) + 5*S2\[Beta]*Sin(2*\[Phi]) + 5*Ci**2*S2\[Beta]*Sin(2*\[Phi]) - 8*S2\[Beta]*Sin(4*\[Phi] - 2*Derivative(1)(\[Phi])) - 
+     -       8*Ci**2*S2\[Beta]*Sin(4*\[Phi] - 2*Derivative(1)(\[Phi]))) + e**4*((-23*C2\[Beta]*Cos(2*\[Phi]))/8. - (23*C2\[Beta]*Ci**2*Cos(2*\[Phi]))/8. + (C2\[Beta]*Cos(2*\[Phi] - 4*Derivative(1)(\[Phi])))/8. + 
+     -       (C2\[Beta]*Ci**2*Cos(2*\[Phi] - 4*Derivative(1)(\[Phi])))/8. + (4*Si**2*Cos(4*\[Phi] - 4*Derivative(1)(\[Phi])))/3. - (81*C2\[Beta]*Cos(6*\[Phi] - 4*Derivative(1)(\[Phi])))/4. - 
+     -       (81*C2\[Beta]*Ci**2*Cos(6*\[Phi] - 4*Derivative(1)(\[Phi])))/4. - (Si**2*Cos(2*\[Phi] - 2*Derivative(1)(\[Phi])))/3. + 20*C2\[Beta]*Cos(4*\[Phi] - 2*Derivative(1)(\[Phi])) + 
+     -       20*C2\[Beta]*Ci**2*Cos(4*\[Phi] - 2*Derivative(1)(\[Phi])) - (23*S2\[Beta]*Sin(2*\[Phi]))/8. - (23*Ci**2*S2\[Beta]*Sin(2*\[Phi]))/8. - (S2\[Beta]*Sin(2*\[Phi] - 4*Derivative(1)(\[Phi])))/8. - 
+     -       (Ci**2*S2\[Beta]*Sin(2*\[Phi] - 4*Derivative(1)(\[Phi])))/8. - (81*S2\[Beta]*Sin(6*\[Phi] - 4*Derivative(1)(\[Phi])))/4. - (81*Ci**2*S2\[Beta]*Sin(6*\[Phi] - 4*Derivative(1)(\[Phi])))/4. + 
+     -       20*S2\[Beta]*Sin(4*\[Phi] - 2*Derivative(1)(\[Phi])) + 20*Ci**2*S2\[Beta]*Sin(4*\[Phi] - 2*Derivative(1)(\[Phi]))) + 
+     -    e**3*((7*C2\[Beta]*Cos(\[Phi] - 3*Derivative(1)(\[Phi])))/48. + (7*C2\[Beta]*Ci**2*Cos(\[Phi] - 3*Derivative(1)(\[Phi])))/48. + (9*Si**2*Cos(3*\[Phi] - 3*Derivative(1)(\[Phi])))/8. - 
+     -       (625*C2\[Beta]*Cos(5*\[Phi] - 3*Derivative(1)(\[Phi])))/48. - (625*C2\[Beta]*Ci**2*Cos(5*\[Phi] - 3*Derivative(1)(\[Phi])))/48. - (Si**2*Cos(\[Phi] - Derivative(1)(\[Phi])))/8. + 
+     -       (171*C2\[Beta]*Cos(3*\[Phi] - Derivative(1)(\[Phi])))/16. + (171*C2\[Beta]*Ci**2*Cos(3*\[Phi] - Derivative(1)(\[Phi])))/16. - (13*C2\[Beta]*Cos(\[Phi] + Derivative(1)(\[Phi])))/16. - 
+     -       (13*C2\[Beta]*Ci**2*Cos(\[Phi] + Derivative(1)(\[Phi])))/16. - (7*S2\[Beta]*Sin(\[Phi] - 3*Derivative(1)(\[Phi])))/48. - (7*Ci**2*S2\[Beta]*Sin(\[Phi] - 3*Derivative(1)(\[Phi])))/48. - 
+     -       (625*S2\[Beta]*Sin(5*\[Phi] - 3*Derivative(1)(\[Phi])))/48. - (625*Ci**2*S2\[Beta]*Sin(5*\[Phi] - 3*Derivative(1)(\[Phi])))/48. + (171*S2\[Beta]*Sin(3*\[Phi] - Derivative(1)(\[Phi])))/16. + 
+     -       (171*Ci**2*S2\[Beta]*Sin(3*\[Phi] - Derivative(1)(\[Phi])))/16. - (13*S2\[Beta]*Sin(\[Phi] + Derivative(1)(\[Phi])))/16. - (13*Ci**2*S2\[Beta]*Sin(\[Phi] + Derivative(1)(\[Phi])))/16.) + 
+     -    e**5*((153*C2\[Beta]*Cos(3*\[Phi] - 5*Derivative(1)(\[Phi])))/1280. + (153*C2\[Beta]*Ci**2*Cos(3*\[Phi] - 5*Derivative(1)(\[Phi])))/1280. + 
+     -       (625*Si**2*Cos(5*\[Phi] - 5*Derivative(1)(\[Phi])))/384. - (117649*C2\[Beta]*Cos(7*\[Phi] - 5*Derivative(1)(\[Phi])))/3840. - 
+     -       (117649*C2\[Beta]*Ci**2*Cos(7*\[Phi] - 5*Derivative(1)(\[Phi])))/3840. + (47*C2\[Beta]*Cos(\[Phi] - 3*Derivative(1)(\[Phi])))/768. + 
+     -       (47*C2\[Beta]*Ci**2*Cos(\[Phi] - 3*Derivative(1)(\[Phi])))/768. - (81*Si**2*Cos(3*\[Phi] - 3*Derivative(1)(\[Phi])))/128. + 
+     -       (26875*C2\[Beta]*Cos(5*\[Phi] - 3*Derivative(1)(\[Phi])))/768. + (26875*C2\[Beta]*Ci**2*Cos(5*\[Phi] - 3*Derivative(1)(\[Phi])))/768. + (Si**2*Cos(\[Phi] - Derivative(1)(\[Phi])))/192. - 
+     -       (963*C2\[Beta]*Cos(3*\[Phi] - Derivative(1)(\[Phi])))/128. - (963*C2\[Beta]*Ci**2*Cos(3*\[Phi] - Derivative(1)(\[Phi])))/128. - (5*C2\[Beta]*Cos(\[Phi] + Derivative(1)(\[Phi])))/384. - 
+     -       (5*C2\[Beta]*Ci**2*Cos(\[Phi] + Derivative(1)(\[Phi])))/384. - (153*S2\[Beta]*Sin(3*\[Phi] - 5*Derivative(1)(\[Phi])))/1280. - 
+     -       (153*Ci**2*S2\[Beta]*Sin(3*\[Phi] - 5*Derivative(1)(\[Phi])))/1280. - (117649*S2\[Beta]*Sin(7*\[Phi] - 5*Derivative(1)(\[Phi])))/3840. - 
+     -       (117649*Ci**2*S2\[Beta]*Sin(7*\[Phi] - 5*Derivative(1)(\[Phi])))/3840. - (47*S2\[Beta]*Sin(\[Phi] - 3*Derivative(1)(\[Phi])))/768. - 
+     -       (47*Ci**2*S2\[Beta]*Sin(\[Phi] - 3*Derivative(1)(\[Phi])))/768. + (26875*S2\[Beta]*Sin(5*\[Phi] - 3*Derivative(1)(\[Phi])))/768. + 
+     -       (26875*Ci**2*S2\[Beta]*Sin(5*\[Phi] - 3*Derivative(1)(\[Phi])))/768. - (963*S2\[Beta]*Sin(3*\[Phi] - Derivative(1)(\[Phi])))/128. - 
+     -       (963*Ci**2*S2\[Beta]*Sin(3*\[Phi] - Derivative(1)(\[Phi])))/128. - (5*S2\[Beta]*Sin(\[Phi] + Derivative(1)(\[Phi])))/384. - (5*Ci**2*S2\[Beta]*Sin(\[Phi] + Derivative(1)(\[Phi])))/384.) + 
+     -    e*(Si**2*Cos(\[Phi] - Derivative(1)(\[Phi])) - (9*C2\[Beta]*Cos(3*\[Phi] - Derivative(1)(\[Phi])))/2. - (9*C2\[Beta]*Ci**2*Cos(3*\[Phi] - Derivative(1)(\[Phi])))/2. + 
+     -       (3*C2\[Beta]*Cos(\[Phi] + Derivative(1)(\[Phi])))/2. + (3*C2\[Beta]*Ci**2*Cos(\[Phi] + Derivative(1)(\[Phi])))/2. - (9*S2\[Beta]*Sin(3*\[Phi] - Derivative(1)(\[Phi])))/2. - 
+     -       (9*Ci**2*S2\[Beta]*Sin(3*\[Phi] - Derivative(1)(\[Phi])))/2. + (3*S2\[Beta]*Sin(\[Phi] + Derivative(1)(\[Phi])))/2. + (3*Ci**2*S2\[Beta]*Sin(\[Phi] + Derivative(1)(\[Phi])))/2.))
