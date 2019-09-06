@@ -1060,7 +1060,7 @@ def xipn(j, n):
 	(* Function to compute 1PN contribution to Subscript[[Xi], j] (Fourier amplitudes) coming from Newtonian amplitude (hx0,hp0) due to \
 	1PN accurate dF/dt in SPA. *)
 	'''
-	Ccoef = (sp.expand(hx0(e, Phi, Phip))).coeff(Cos((j * Phi) - (j - 2) * Phip)) +  (sp.expand(hp0(e, Phi, Phip))).coeff(Cos((j * Phi) - (j - n) * Phip))
+	Ccoef = (sp.expand(hx0(e, Phi, Phip))).coeff(Cos((j * Phi) - (j - 2) * Phip)) +  (sp.expand(hp0(e, Phi, Phip))).coeff(Cos((j * Phi) - (j - 2) * Phip))
 	Scoef = (sp.expand(hx0(e, Phi, Phip))).coeff(Sin((j * Phi) - (j - 2) * Phip)) +  (sp.expand(hp0(e, Phi, Phip))).coeff(Sin((j * Phi) - (j - 2) * Phip))
 	sigrt = Sign(Ccoef) * Sqrt(Ccoef**2 + Scoef**2)
 	intan = ArcTan(-Scoef / Ccoef)
