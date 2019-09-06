@@ -1,5 +1,11 @@
 import numpy as np
+import sympy as sp
 
+
+#Symbol
+Phi = sp.symbols("Phi")
+Phip = sp.symbols("Phip")
+e = sp.symbols("e")
 
 
 #Variables
@@ -9,11 +15,14 @@ f = 100;                      #(* GW or Fourier \frequency *)
 Pi = np.pi 
 
 #Functions
-Cos = np.cos
-Sin = np.sin
-Sqrt = np.sqrt
+Cos = sp.cos
+Sin = sp.sin
+Sqrt = sp.sqrt
+Exp = sp.exp
+ArcTan = sp.atan
+Sign = sp.functions.sign
+
 Log = np.log
-Exp = np.exp
 UnitStep = lambda x: np.heaviside(x, 1)  #unit step function, equals to 0 for x<0 and 1 for x >= 0
 
 
@@ -410,14 +419,14 @@ def fp(j, n):
 
 	return ans
 
-
+######hx, hp##########
 def hx0(e, Phi, Phip):
 	'''
 	(* Newtonian amplitude of GW Cross polarisation accurate to e^6 with antenna pattern Fc multiplied . Here [Phi] = (1+k)l and  [Phi]' = k l are orbital phase and shifted \
 	phase respectively with l = mean anomaly and k = rate of advance of periastron  *)
 	'''
 	ans = Fc*(4*Ci*S2Beta*Cos(2*Phi) - 4*C2Beta*Ci*Sin(2*Phi) + e**6*((-65*Ci*S2Beta*Cos(2*Phi))/72. - (11*Ci*S2Beta*Cos(4*Phi - 6*Phip))/45. + \
-	(4096*Ci*S2Beta*Cos(8*Phi - 6*Phip))/45. - (11*Ci*S2Beta*Cos(2*Phi - 4*Phip))/120. - (2349*Ci*S2Beta*Cos(6*Phi - 4*Phip))/20. + \
+	(4096*Ci*S2Beta* Cos(8*Phi - 6*Phip))/45. - (11*Ci*S2Beta*Cos(2*Phi - 4*Phip))/120. - (2349*Ci*S2Beta*Cos(6*Phi - 4*Phip))/20. + \
 	(101*Ci*S2Beta*Cos(4*Phi - 2*Phip))/3. + (65*C2Beta*Ci*Sin(2*Phi))/72. - (11*C2Beta*Ci*Sin(4*Phi - 6*Phip))/45. - \
 	(4096*C2Beta*Ci*Sin(8*Phi - 6*Phip))/45. - (11*C2Beta*Ci*Sin(2*Phi - 4*Phip))/120. + (2349*C2Beta*Ci*Sin(6*Phi - 4*Phip))/20. - \
 	(101*C2Beta*Ci*Sin(4*Phi - 2*Phip))/3.) + e**2*\
@@ -1030,15 +1039,33 @@ def hp1(e, Phi, Phip):
 
 
 
-##  ##
+## xi, xipn ##
+def xi(j, n, cpol, ppol):
+	'''
+	(* Function to compute Subscript[[Xi], j] (Fourier amplitudes) corresponding to time domain phases j[Phi] - (j+n)[Phi]' with \
+	Newtonian accurate dF/dt in SPA. *)
+	'''
+	Ccoef = (sp.expand(cpol)).coeff(Cos((j * Phi) - (j + n) * Phip)) +  (sp.expand(ppol)).coeff(Cos((j * Phi) - (j + n) * Phip))
+	Scoef = (sp.expand(cpol)).coeff(Sin((j * Phi) - (j + n) * Phip)) +  (sp.expand(ppol)).coeff(Sin((j * Phi) - (j + n) * Phip))
+	sigrt = Sign(Ccoef) * Sqrt(Ccoef**2 + Scoef**2)
+	intan = ArcTan(-Scoef / Ccoef)
+	ans = sp.simplify(((1 - e**2)**1.75/Sqrt(1 + (73*e**2)/24. + (37*e**4)/96.)*sigrt*Exp(-sp.I * intan)).rewrite(sp.cos))
+	return ans
 
 
+def xipn(j, n):
+	'''
+	(* Function to compute 1PN contribution to Subscript[[Xi], j] (Fourier amplitudes) coming from Newtonian amplitude (hx0,hp0) due to \
+	1PN accurate dF/dt in SPA. *)
+	'''
+	Ccoef = (sp.expand(hx0(e, Phi, Phip))).coeff(Cos((j * Phi) - (j - 2) * Phip)) +  (sp.expand(hp0(e, Phi, Phip))).coeff(Cos((j * Phi) - (j - n) * Phip))
+	Scoef = (sp.expand(hx0(e, Phi, Phip))).coeff(Sin((j * Phi) - (j - 2) * Phip)) +  (sp.expand(hp0(e, Phi, Phip))).coeff(Sin((j * Phi) - (j - 2) * Phip))
+	sigrt = Sign(Ccoef) * Sqrt(Ccoef**2 + Scoef**2)
+	intan = ArcTan(-Scoef / Ccoef)
+	ans = sp.simplify((((1 - e**2)**0.75*(15584. - 47820.*e**2 - 135611.*e**4 - 9645.*e**6))/(10752.*(1 + (73*e**2)/24. + (37*e**4)/96.)**1.5)*sigrt*Exp(-sp.I * intan)).rewrite(sp.cos))
+	return ans
 
-####internal function######
 
-# (* Function to compute Subscript[\[Xi], j] (Fourier amplitudes) \
-# corresponding to time domain phases j\[Phi] - (j+n)\[Phi]' with \
-# Newtonian accurate dF/dt in SPA. *)
 
 
 
@@ -1061,20 +1088,25 @@ if __name__ == '__main__':
 	# print(et(2,3))
 	# print(fp(2,3))
 
-	k = np.pi / 3
-	l = np.pi / 5
-	e = 0.3
+	# k = np.pi / 3
+	# l = np.pi / 5
+	# e = 0.3
 
-	Phi = (1+k) * l 
-	Phip = k * l
+	# Phi = (1+k) * l 
+	# Phip = k * l
 
 
 
-	print(hx0(e, Phi, Phip))
-	print(hp0(e, Phi, Phip))
-	print(hx05(e, Phi, Phip))
-	print(hp05(e, Phi, Phip))
-	print(hx1(e, Phi, Phip))
-	print(hp1(e, Phi, Phip))
+	# print(hx0(e, Phi, Phip))
+	# print(hp0(e, Phi, Phip))
+	# print(hx05(e, Phi, Phip))
+	# print(hp05(e, Phi, Phip))
+	# print(hx1(e, Phi, Phip))
+	# print(hp1(e, Phi, Phip))
 
+	e_val = 0.1
+	ans1 = (xi(1,2, hx1(e, Phi, Phip), hp1(e, Phi, Phip))).evalf(subs={e:e_val},n=15)
+	ans2 = (xipn(1,2)).evalf(subs={e:e_val},n=15)
+
+	print(ans1, ans2)
 	print(hf)
