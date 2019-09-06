@@ -180,3 +180,7 @@ def et(j, n):
 
 
 et(2,3)
+
+# (* 3PN accurate et upto order et0^5. For SPA et has to be computed at \
+# the shifted harmonic of orbital frequency F by putting x = ((G m 2 \
+# \[Pi] f)/( c^3(j-(j+n)*k/(1+k))))^(2/3)  *) 

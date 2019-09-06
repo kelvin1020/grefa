@@ -1,0 +1,811 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     32011,        803]
+NotebookOptionsPosition[     31463,        780]
+NotebookOutlinePosition[     31804,        795]
+CellTagsIndexPosition[     31761,        792]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Clear", "[", "\"\<`*\>\"", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"$Assumptions", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+         "Fc", ",", "Fp", ",", "i", ",", "\[Beta]", ",", "e", ",", "et0", ",",
+           "\[Chi]"}], "}"}], "\[Element]", "Reals"}], "  ", "&&", " ", 
+       RowBox[{"e", "\[GreaterEqual]", "0"}], "&&", 
+       RowBox[{"e", "\[LessEqual]", "1"}], "&&", 
+       RowBox[{"et0", "\[GreaterEqual]", "0"}], " ", "&&", 
+       RowBox[{"et0", "\[LessEqual]", "1"}], "&&", 
+       RowBox[{"\[Chi]", ">", "0"}], "&&", " ", 
+       RowBox[{"i", "\[LessEqual]", 
+        FractionBox["Pi", "2"]}], "&&", 
+       RowBox[{"\[Beta]", "\[LessEqual]", 
+        FractionBox["Pi", "2"]}], "&&", " ", 
+       RowBox[{"i", "\[GreaterEqual]", " ", "0"}], " ", "&&", " ", 
+       RowBox[{"\[Beta]", "\[GreaterEqual]", " ", "0"}], "&&", " ", 
+       RowBox[{"Fc", "\[LessEqual]", "1"}], "&&", 
+       RowBox[{"Fp", "\[LessEqual]", "1"}], "&&", " ", 
+       RowBox[{"Fc", "\[GreaterEqual]", 
+        RowBox[{"-", "1"}]}], " ", "&&", " ", 
+       RowBox[{"Fp", "\[GreaterEqual]", 
+        RowBox[{"-", "1"}]}], "&&", 
+       RowBox[{"\[Eta]", ">", "0"}], "&&", 
+       RowBox[{"\[Eta]", "\[LessEqual]", "0.25"}]}], "}"}]}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Assumptions", " ", "to", " ", "simplify", " ", "computations"}],
+      " ", "*)"}], "   ", "\[IndentingNewLine]", 
+    RowBox[{"\[Gamma]", "=", "0.5772156649"}], ";", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Euler", "-", 
+      RowBox[{"Gamma", " ", 
+       RowBox[{"constant", ".", " ", "Appears"}], " ", "in", " ", "3", "PN", 
+       " ", "corrections"}]}], " ", "*)"}], " ", "\[IndentingNewLine]", 
+    RowBox[{"Fp", "=", 
+     RowBox[{"-", "0.5"}]}], ";", 
+    RowBox[{"Fc", "=", "0.866025"}], ";", "   ", 
+    RowBox[{"(*", "  ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+       "Choosing", " ", "antenna", " ", "patterns", " ", "for", " ", 
+        "\[Theta]"}], "=", 
+       SuperscriptBox["0", "\[Degree]"]}], ",", " ", 
+      RowBox[{"\[Phi]", "=", " ", 
+       RowBox[{
+        RowBox[{
+         SuperscriptBox["30", "\[Degree]"], " ", "and", " ", "\[Psi]"}], "=", 
+        
+        SuperscriptBox["30", "\[Degree]"]}]}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"\[Phi]c", "=", "0"}], ";", "     ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Orbital", " ", "phase", " ", "at", " ", "coalescence"}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"tc", "=", "0"}], ";", "      ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Time", " ", "of", " ", "coalescence"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"m1", "=", "10"}], ";", 
+    RowBox[{"m2", "=", "10"}], ";", "    ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Mass", " ", "of", " ", "the", " ", "binary", " ", "components", " ", 
+      "in", " ", "solar", " ", "mass", " ", "units"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"msun", "=", 
+     RowBox[{"1.989", "\[Times]", 
+      SuperscriptBox["10", "30"]}]}], ";", "      ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Solar", " ", "mass", " ", "in", " ", 
+      RowBox[{"S", ".", "I", ".", " ", "units"}]}], "  ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"m", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"m1", "+", "m2"}], ")"}], "*", "msun"}]}], ";", "       ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Total", " ", "mass", " ", "of", " ", "the", " ", "binary", " ", "in", 
+      " ", 
+      RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"delta", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"m1", "-", "m2"}], ")"}], "*", "msun"}]}], ";", "      ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Difference", " ", "in", " ", "the", " ", "masses", " ", "of", " ", 
+      "the", " ", "binary", " ", "components", " ", "in", " ", 
+      RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"\[Eta]", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"m1", "*", "m2", "*", 
+        SuperscriptBox["msun", "2"]}], ")"}], "/", 
+      SuperscriptBox["m", "2"]}]}], ";", "      ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Symmetric", " ", "mass", " ", "ratio"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"G", "=", 
+     RowBox[{"6.67408", "\[Times]", 
+      SuperscriptBox["10", 
+       RowBox[{"-", "11"}]]}]}], ";", "    ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Gravitational", " ", "constant", " ", "in", " ", 
+      RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"c", "=", "299792458"}], ";", "           ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Speed", " ", "of", " ", "light", " ", "in", " ", "vacuum", " ", "in", 
+      " ", 
+      RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"d", "=", 
+     RowBox[{"100", "*", "3.086", "*", 
+      SuperscriptBox["10", "22"]}]}], ";", "    ", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Distance", " ", "to", " ", "the", " ", "binary", " ", "in", " ", 
+      RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"f0", "=", "20.000"}], ";", "    ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"Lower", " ", "frequency", " ", "cut"}], "-", 
+      RowBox[{"off", " ", "of", " ", "the", " ", "GW", " ", "detector"}]}], 
+     " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"ff", "=", 
+     RowBox[{
+      SuperscriptBox["c", "3"], "/", 
+      RowBox[{"(", 
+       RowBox[{"G", " ", "m", " ", "\[Pi]", " ", 
+        SuperscriptBox["6", 
+         RowBox[{"3", "/", "2"}]]}], ")"}]}]}], ";", "      ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Fourier", " ", "frequency", " ", "corresponding", " ", "to", " ", 
+      "second", " ", "harmonic", " ", "of", " ", "last", " ", "stable", " ", 
+      "orbit", " ", "of", " ", "the", " ", "system"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"\[Chi]", "=", 
+     RowBox[{"f", "/", "f0"}]}], ";", "   ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{
+      "Ratio", " ", "of", " ", "Fourier", " ", "frequency", " ", "to", " ", 
+       "the", " ", "lower", " ", "cut"}], "-", 
+      RowBox[{"off", " ", "frequency"}]}], " ", "*)"}], "     ", 
+    "\[IndentingNewLine]", 
+    RowBox[{"i", "=", 
+     RowBox[{"\[Pi]", "/", "3"}]}], ";", 
+    RowBox[{"\[Beta]", "=", 
+     RowBox[{"\[Pi]", "/", "3"}]}], ";", "    ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Choose", " ", "any", " ", "value", " ", "for", " ", "angles", " ", 
+      "relating", " ", "line", " ", "of", " ", "sight", " ", "to", " ", "the",
+       " ", "orbital", " ", "plane", " ", "of", " ", "the", " ", "binary"}], 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"Ci", "=", 
+     RowBox[{"Cos", "[", "i", "]"}]}], ";", "    ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Defining", " ", "variables", " ", "as", " ", "trigonometric", " ", 
+      "functions", " ", "of", " ", "angles", " ", "iota", " ", "and", " ", 
+      "beta"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"Si", "=", 
+     RowBox[{"Sin", "[", "i", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"S1\[Beta]", "=", 
+     RowBox[{"Sin", "[", " ", "\[Beta]", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"C1\[Beta]", "=", 
+     RowBox[{"Cos", "[", " ", "\[Beta]", "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"S2\[Beta]", "=", 
+     RowBox[{"Sin", "[", 
+      RowBox[{"2", " ", "\[Beta]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"C2\[Beta]", "=", 
+     RowBox[{"Cos", "[", 
+      RowBox[{"2", " ", "\[Beta]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"S3\[Beta]", "=", 
+     RowBox[{"Sin", "[", 
+      RowBox[{"3", " ", "\[Beta]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"C3\[Beta]", "=", 
+     RowBox[{"Cos", "[", 
+      RowBox[{"3", " ", "\[Beta]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"S4\[Beta]", "=", 
+     RowBox[{"Sin", "[", 
+      RowBox[{"4", " ", "\[Beta]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"C4\[Beta]", "=", 
+     RowBox[{"Cos", "[", 
+      RowBox[{"4", " ", "\[Beta]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"et0", "=", " ", "0.1"}], ";", "   ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Eccentricity", " ", "at", " ", "lower", " ", "cut"}], "-", 
+       RowBox[{
+       "off", " ", "frequency", " ", "of", " ", "the", " ", "detector"}]}], 
+      ",", " ", 
+      RowBox[{
+       RowBox[{"f0", " ", 
+        RowBox[{"i", ".", "e", ".", " ", "et0"}]}], " ", "=", " ", 
+       RowBox[{"et", 
+        RowBox[{"(", "f0", ")"}]}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"f", "=", " ", "100"}], ";"}], "   ", 
+   RowBox[{"(*", " ", 
+    RowBox[{"GW", " ", "or", " ", "Fourier", " ", "frequency"}], " ", "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"k", " ", "=", " ", 
+     RowBox[{"Pi", "/", "3"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"l", " ", "=", " ", 
+     RowBox[{"Pi", "/", "5"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"e", " ", "=", " ", "0.3"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Phi]", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", "k"}], ")"}], "*", "l"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"\[Phi]", "'"}], " ", "=", " ", 
+     RowBox[{"k", "*", "l"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.7767454816577578`*^9, 3.776745481879753*^9}, 
+   3.776745683663331*^9, {3.776746414269315*^9, 3.7767464384879103`*^9}, 
+   3.77674647279557*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"k", "=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        SuperscriptBox["x", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          FractionBox["27", "2"], "-", 
+          RowBox[{"7", " ", "\[Eta]"}], "+", 
+          RowBox[{
+           SuperscriptBox["et0", "6"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             FractionBox["1589015535", 
+              RowBox[{"5175296", " ", 
+               SuperscriptBox["\[Chi]", "7"]}]], "-", 
+             FractionBox[
+              RowBox[{"110496315", " ", "\[Eta]"}], 
+              RowBox[{"184832", " ", 
+               SuperscriptBox["\[Chi]", "7"]}]], "+", 
+             FractionBox["498132560585", 
+              RowBox[{"1614692352", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "3"}]]}]], "+", 
+             FractionBox[
+              RowBox[{"168333575", " ", "\[Eta]"}], 
+              RowBox[{"1478656", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "3"}]]}]], "-", 
+             FractionBox["908911888607", 
+              RowBox[{"1816528896", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"44", "/", "9"}]]}]], "+", 
+             FractionBox[
+              RowBox[{"4154545993", " ", "\[Eta]"}], 
+              RowBox[{"4990464", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"44", "/", "9"}]]}]], "-", 
+             FractionBox["892815840919", 
+              RowBox[{"1816528896", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"38", "/", "9"}]]}]], "-", 
+             FractionBox[
+              RowBox[{"301299733", " ", "\[Eta]"}], 
+              RowBox[{"4990464", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"38", "/", "9"}]]}]], "+", 
+             FractionBox["3110697122471", 
+              RowBox[{"14532231168", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"25", "/", "9"}]]}]], "-", 
+             FractionBox[
+              RowBox[{"12075357445", " ", "\[Eta]"}], 
+              RowBox[{"39923712", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"25", "/", "9"}]]}]], "+", 
+             FractionBox["17781607555", 
+              RowBox[{"69866496", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "9"}]]}]], "-", 
+             FractionBox[
+              RowBox[{"82799465", " ", "\[Eta]"}], 
+              RowBox[{"2495232", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "9"}]]}]]}], ")"}]}], "+", 
+          RowBox[{
+           SuperscriptBox["et0", "4"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", 
+              FractionBox["6830363", 
+               RowBox[{"153216", " ", 
+                SuperscriptBox["\[Chi]", 
+                 RowBox[{"44", "/", "9"}]]}]]}], "+", 
+             FractionBox[
+              RowBox[{"474967", " ", "\[Eta]"}], 
+              RowBox[{"5472", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"44", "/", "9"}]]}]], "-", 
+             FractionBox["268677653", 
+              RowBox[{"3983616", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"38", "/", "9"}]]}]], "-", 
+             FractionBox[
+              RowBox[{"90671", " ", "\[Eta]"}], 
+              RowBox[{"10944", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"38", "/", "9"}]]}]], "+", 
+             FractionBox["18185905", 
+              RowBox[{"284544", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"25", "/", "9"}]]}]], "-", 
+             FractionBox[
+              RowBox[{"267133", " ", "\[Eta]"}], 
+              RowBox[{"2736", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"25", "/", "9"}]]}]], "+", 
+             FractionBox["34967929", 
+              RowBox[{"306432", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "9"}]]}]], "-", 
+             FractionBox[
+              RowBox[{"162827", " ", "\[Eta]"}], 
+              RowBox[{"10944", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "9"}]]}]]}], ")"}]}], "+", 
+          RowBox[{
+           SuperscriptBox["et0", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             FractionBox["2833", 
+              RowBox[{"336", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"25", "/", "9"}]]}]], "-", 
+             FractionBox[
+              RowBox[{"197", " ", "\[Eta]"}], 
+              RowBox[{"12", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"25", "/", "9"}]]}]], "+", 
+             FractionBox["10523", 
+              RowBox[{"336", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "9"}]]}]], "-", 
+             FractionBox[
+              RowBox[{"49", " ", "\[Eta]"}], 
+              RowBox[{"12", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "9"}]]}]]}], ")"}]}]}], ")"}]}], "+", 
+       RowBox[{"x", " ", 
+        RowBox[{"(", 
+         RowBox[{"3", "+", 
+          RowBox[{
+           SuperscriptBox["et0", "4"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", 
+              FractionBox["2411", 
+               RowBox[{"304", " ", 
+                SuperscriptBox["\[Chi]", 
+                 RowBox[{"38", "/", "9"}]]}]]}], "+", 
+             FractionBox["3323", 
+              RowBox[{"304", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "9"}]]}]]}], ")"}]}], "+", 
+          RowBox[{
+           SuperscriptBox["et0", "6"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             FractionBox["1682685", 
+              RowBox[{"46208", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "3"}]]}]], "-", 
+             FractionBox["8011753", 
+              RowBox[{"138624", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"38", "/", "9"}]]}]], "+", 
+             FractionBox["1689785", 
+              RowBox[{"69312", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "9"}]]}]]}], ")"}]}], "+", 
+          FractionBox[
+           RowBox[{"3", " ", 
+            SuperscriptBox["et0", "2"]}], 
+           SuperscriptBox["\[Chi]", 
+            RowBox[{"19", "/", "9"}]]]}], ")"}]}], "+", 
+       RowBox[{
+        SuperscriptBox["x", 
+         RowBox[{"5", "/", "2"}]], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", 
+           FractionBox[
+            RowBox[{"377", " ", 
+             SuperscriptBox["et0", "2"], " ", "\[Pi]", " ", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"-", "1"}], "+", "\[Chi]"}], ")"}]}], 
+            RowBox[{"24", " ", 
+             SuperscriptBox["\[Chi]", 
+              RowBox[{"28", "/", "9"}]]}]]}], "-", 
+          FractionBox[
+           RowBox[{
+            SuperscriptBox["et0", "4"], " ", "\[Pi]", " ", 
+            RowBox[{"(", 
+             RowBox[{"3635788", "-", 
+              RowBox[{"2258257", " ", "\[Chi]"}], "-", 
+              RowBox[{"3883073", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "9"}]]}], "+", 
+              RowBox[{"2505542", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"28", "/", "9"}]]}]}], ")"}]}], 
+           RowBox[{"43776", " ", 
+            SuperscriptBox["\[Chi]", 
+             RowBox[{"47", "/", "9"}]]}]], "-", 
+          FractionBox[
+           RowBox[{
+            SuperscriptBox["et0", "6"], " ", "\[Pi]", " ", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"-", "331142311890"}], "+", 
+              RowBox[{"189286331247", " ", "\[Chi]"}], "+", 
+              RowBox[{"446685572185", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"19", "/", "9"}]]}], "-", 
+              RowBox[{"217621452319", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"28", "/", "9"}]]}], "-", 
+              RowBox[{"161105816843", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"38", "/", "9"}]]}], "+", 
+              RowBox[{"73897677620", " ", 
+               SuperscriptBox["\[Chi]", 
+                RowBox[{"47", "/", "9"}]]}]}], ")"}]}], 
+           RowBox[{"578893824", " ", 
+            SuperscriptBox["\[Chi]", 
+             RowBox[{"22", "/", "3"}]]}]]}], ")"}]}], "+", 
+       RowBox[{
+        SuperscriptBox["x", "3"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           FractionBox["1", "32"], " ", 
+           RowBox[{"(", 
+            RowBox[{"2160", "-", 
+             RowBox[{"5192", " ", "\[Eta]"}], "+", 
+             RowBox[{"123", " ", 
+              SuperscriptBox["\[Pi]", "2"], " ", "\[Eta]"}], "+", 
+             RowBox[{"224", " ", 
+              SuperscriptBox["\[Eta]", "2"]}]}], ")"}]}], "+", 
+          RowBox[{
+           FractionBox["1", 
+            RowBox[{"1016064", " ", 
+             SuperscriptBox["\[Chi]", 
+              RowBox[{"31", "/", "9"}]]}]], 
+           SuperscriptBox["et0", "2"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "1193251"}], "-", 
+             RowBox[{"22282512", " ", "\[Eta]"}], "+", 
+             RowBox[{"42700560", " ", 
+              SuperscriptBox["\[Eta]", "2"]}], "+", 
+             RowBox[{"89434977", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"2", "/", "3"}]]}], "-", 
+             RowBox[{"185795232", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"2", "/", "3"}]]}], "+", 
+             RowBox[{"22703856", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"2", "/", "3"}]]}], "+", 
+             RowBox[{"285923842", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}], "-", 
+             RowBox[{"477003408", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}], "+", 
+             RowBox[{"12692862", " ", 
+              SuperscriptBox["\[Pi]", "2"], " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}], "-", 
+             RowBox[{"3424512", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}]}], ")"}]}], "+", 
+          RowBox[{
+           FractionBox["1", 
+            RowBox[{"84325183488", " ", 
+             SuperscriptBox["\[Chi]", 
+              RowBox[{"50", "/", "9"}]]}]], 
+           SuperscriptBox["et0", "4"], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "4759063292165"}], "+", 
+             RowBox[{"30348860970792", " ", "\[Eta]"}], "-", 
+             RowBox[{"38763744107088", " ", 
+              SuperscriptBox["\[Eta]", "2"]}], "-", 
+             RowBox[{"31968879219858", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"2", "/", "3"}]]}], "+", 
+             RowBox[{"58318046249232", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"2", "/", "3"}]]}], "+", 
+             RowBox[{"7646159215968", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"2", "/", "3"}]]}], "-", 
+             RowBox[{"31736268138496", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}], "+", 
+             RowBox[{"45889671128952", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}], "-", 
+             RowBox[{"1650389381550", " ", 
+              SuperscriptBox["\[Pi]", "2"], " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}], "+", 
+             RowBox[{"219411602592", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}], "+", 
+             RowBox[{"2043730880707", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"19", "/", "9"}]]}], "-", 
+             RowBox[{"27141856655592", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"19", "/", "9"}]]}], "+", 
+             RowBox[{"35073241576464", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"19", "/", "9"}]]}], "+", 
+             RowBox[{"56262861824610", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"25", "/", "9"}]]}], "-", 
+             RowBox[{"93285988260024", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"25", "/", "9"}]]}], "+", 
+             RowBox[{"11206302010176", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"25", "/", "9"}]]}], "+", 
+             RowBox[{"86461368353906", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"31", "/", "9"}]]}], "-", 
+             RowBox[{"144242491555344", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"31", "/", "9"}]]}], "+", 
+             RowBox[{"3838232618766", " ", 
+              SuperscriptBox["\[Pi]", "2"], " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"31", "/", "9"}]]}], "-", 
+             RowBox[{"1035548457216", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"31", "/", "9"}]]}]}], ")"}]}], "+", 
+          RowBox[{
+           FractionBox["1", 
+            RowBox[{"3999037501734912", " ", 
+             SuperscriptBox["\[Chi]", 
+              RowBox[{"23", "/", "3"}]]}]], 
+           SuperscriptBox["et0", "6"], " ", 
+           RowBox[{"(", 
+            RowBox[{"3279894679024104960", "-", 
+             RowBox[{"16631859540896308800", " ", "\[Eta]"}], "+", 
+             RowBox[{"19202503791507079680", " ", 
+              SuperscriptBox["\[Eta]", "2"]}], "+", 
+             RowBox[{"10402025549836075155", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"2", "/", "3"}]]}], "-", 
+             RowBox[{"16414748179030197360", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"2", "/", "3"}]]}], "-", 
+             RowBox[{"7473844435281260400", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"2", "/", "3"}]]}], "+", 
+             RowBox[{"6636901757399139267", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}], "-", 
+             RowBox[{"6647849008784363016", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}], "+", 
+             RowBox[{"341159644201429872", " ", 
+              SuperscriptBox["\[Pi]", "2"], " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}], "+", 
+             RowBox[{"623118469564347120", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"4", "/", "3"}]]}], "-", 
+             RowBox[{"4220015697065866256", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"19", "/", "9"}]]}], "+", 
+             RowBox[{"21692272309533291648", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"19", "/", "9"}]]}], "-", 
+             RowBox[{"23329096412641114368", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"19", "/", "9"}]]}], "-", 
+             RowBox[{"17016310487961012648", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"25", "/", "9"}]]}], "+", 
+             RowBox[{"26221595034201700224", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"25", "/", "9"}]]}], "+", 
+             RowBox[{"3477817715529865344", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"25", "/", "9"}]]}], "-", 
+             RowBox[{"10967800378519109632", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"31", "/", "9"}]]}], "+", 
+             RowBox[{"15859103224796779584", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"31", "/", "9"}]]}], "-", 
+             RowBox[{"570361367148627600", " ", 
+              SuperscriptBox["\[Pi]", "2"], " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"31", "/", "9"}]]}], "+", 
+             RowBox[{"75826894562974464", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"31", "/", "9"}]]}], "+", 
+             RowBox[{"493039468942823701", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"38", "/", "9"}]]}], "-", 
+             RowBox[{"6093524899450135056", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"38", "/", "9"}]]}], "+", 
+             RowBox[{"7224047870706816240", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"38", "/", "9"}]]}], "+", 
+             RowBox[{"8936345368795116909", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"44", "/", "9"}]]}], "-", 
+             RowBox[{"13792229587322482296", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"44", "/", "9"}]]}], "+", 
+             RowBox[{"1646334720273668880", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"44", "/", "9"}]]}], "+", 
+             RowBox[{"9145059780731944160", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"50", "/", "9"}]]}], "-", 
+             RowBox[{"15256596481285635840", " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"50", "/", "9"}]]}], "+", 
+             RowBox[{"405971677516073760", " ", 
+              SuperscriptBox["\[Pi]", "2"], " ", "\[Eta]", " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"50", "/", "9"}]]}], "-", 
+             RowBox[{"109530449579765760", " ", 
+              SuperscriptBox["\[Eta]", "2"], " ", 
+              SuperscriptBox["\[Chi]", 
+               RowBox[{"50", "/", "9"}]]}]}], ")"}]}]}], ")"}]}]}], " ", 
+      ")"}], "/.", 
+     RowBox[{"x", "\[Rule]", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        FractionBox[
+         RowBox[{"G", " ", "m", " ", "2", " ", "\[Pi]", " ", "f"}], 
+         RowBox[{" ", 
+          RowBox[{
+           SuperscriptBox["c", 
+            RowBox[{"3", " "}]], "j"}]}]], ")"}], 
+       RowBox[{"2", "/", "3"}]]}]}]}], ";"}], "  ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"3", "PN", " ", "accurate", " ", "k"}], ",", 
+    RowBox[{"rate", " ", "of", " ", "advance", " ", "of", " ", "periastron"}],
+     ",", 
+    RowBox[{
+     RowBox[{"accurate", " ", "to", " ", 
+      RowBox[{
+       SuperscriptBox["et0", "6"], ".", " ", "Evaluated"}], " ", "at", " ", 
+      "the", " ", "unperturbed", " ", "stationary", " ", "point", " ", "x"}], 
+     " ", "=", " ", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       FractionBox[
+        RowBox[{"G", " ", "m", " ", "2", " ", "\[Pi]", " ", "f"}], 
+        RowBox[{" ", 
+         RowBox[{
+          SuperscriptBox["c", 
+           RowBox[{"3", " "}]], "j"}]}]], ")"}], 
+      RowBox[{"2", "/", "3"}]]}]}], " ", "*)"}]}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"j", "=", " ", 
+  "2"}], "\[IndentingNewLine]", "k", "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.77674553291494*^9, 3.776745534356907*^9}, {
+   3.776745714902863*^9, 3.776745733765044*^9}, 3.7767458978323402`*^9, 
+   3.776746388295697*^9, 3.77674645189771*^9, {3.776746484680073*^9, 
+   3.776746487615059*^9}}],
+
+Cell[BoxData["2"], "Output",
+ CellChangeTimes->{3.77674645258635*^9, 3.7767464882704983`*^9}],
+
+Cell[BoxData["0.44553458153789094`"], "Output",
+ CellChangeTimes->{3.77674645258635*^9, 3.776746488271063*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NumberForm", "[", 
+  RowBox[{"0.44553458153789094`", ",", "16"}], "]"}]], "Input",
+ NumberMarks->False],
+
+Cell[BoxData[
+ TagBox[
+  InterpretationBox["\<\"0.445534581537891\"\>",
+   0.44553458153789094`,
+   AutoDelete->True],
+  NumberForm[#, 16]& ]], "Output",
+ CellChangeTimes->{3.776746495397716*^9}]
+}, Open  ]]
+},
+WindowSize->{1389, 753},
+WindowMargins->{{Automatic, 367}, {Automatic, 68}},
+FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 10007, 250, 996, "Input"],
+Cell[10568, 272, 19937, 473, 958, "Input"],
+Cell[CellGroupData[{
+Cell[30530, 749, 346, 6, 77, "Input"],
+Cell[30879, 757, 93, 1, 32, "Output"],
+Cell[30975, 760, 110, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31122, 766, 127, 3, 34, "Input"],
+Cell[31252, 771, 195, 6, 46, "Output"]
+}, Open  ]]
+}
+]
+*)
+
