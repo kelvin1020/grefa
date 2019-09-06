@@ -1100,31 +1100,5 @@ if __name__ == '__main__':
 	(delta*hf05)/(m*((f*G*m)/c**3)**(5./6.)*Pi**(5./6.)) + hf1/(Sqrt((f*G*m)/c**3)*Sqrt(Pi)))*Sqrt((5*Pi)/6.)*Sqrt(Eta))/\
 	(8.*c**5*d)
 
-	# print(k(2))
-	# print(et(2,3))
-	# print(fp(2,3))
-
-	# k = np.pi / 3
-	# l = np.pi / 5
-	# e = 0.3
-
-	# Phi = (1+k) * l 
-	# Phip = k * l
-
-
-
-	# print(hx0(e, Phi, Phip))
-	# print(hp0(e, Phi, Phip))
-	# print(hx05(e, Phi, Phip))
-	# print(hp05(e, Phi, Phip))
-	# print(hx1(e, Phi, Phip))
-	# print(hp1(e, Phi, Phip))
-
-	# e_val = 0.1
-	# ans1 = (xi(1,2, hx1(e, Phi, Phip), hp1(e, Phi, Phip))).evalf(subs={e:e_val},n=num_prec)
-	# ans2 = (xipn(1,2)).evalf(subs={e:e_val},n=num_prec)
-
-	# print(ans1, ans2)
-
-	print(hf0, hf05, hf1)
-	print(hf)
+	print("hf0 =", hf0, "hf05 =", hf05, "hf1 =", hf1)
+	print("hf =", hf)
