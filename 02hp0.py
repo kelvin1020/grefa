@@ -1,4 +1,4 @@
-Fp*(-2*C2Beta*Cos(2*Phi) - 2*C2Beta*Ci**2*Cos(2*Phi) - 2*S2Beta*Sin(2*Phi) - 2*Ci**2*S2Beta*Sin(2*Phi) + \
+hp0 = Fp*(-2*C2Beta*Cos(2*Phi) - 2*C2Beta*Ci**2*Cos(2*Phi) - 2*S2Beta*Sin(2*Phi) - 2*Ci**2*S2Beta*Sin(2*Phi) + \
 e**6*((65*C2Beta*Cos(2*Phi))/144. + (65*C2Beta*Ci**2*Cos(2*Phi))/144. + (11*C2Beta*Cos(4*Phi - 6*Phip))/90. + \
 (11*C2Beta*Ci**2*Cos(4*Phi - 6*Phip))/90. + (81*Si**2*Cos(6*Phi - 6*Phip))/40. - (2048*C2Beta*Cos(8*Phi - 6*Phip))/45. - \
 (2048*C2Beta*Ci**2*Cos(8*Phi - 6*Phip))/45. + (11*C2Beta*Cos(2*Phi - 4*Phip))/240. + \
@@ -39,3 +39,5 @@ e**5*((153*C2Beta*Cos(3*Phi - 5*Phip))/1280. + (153*C2Beta*Ci**2*Cos(3*Phi - 5*P
 e*(Si**2*Cos(Phi - Phip) - (9*C2Beta*Cos(3*Phi - Phip))/2. - (9*C2Beta*Ci**2*Cos(3*Phi - Phip))/2. + \
 (3*C2Beta*Cos(Phi + Phip))/2. + (3*C2Beta*Ci**2*Cos(Phi + Phip))/2. - (9*S2Beta*Sin(3*Phi - Phip))/2. - \
 (9*Ci**2*S2Beta*Sin(3*Phi - Phip))/2. + (3*S2Beta*Sin(Phi + Phip))/2. + (3*Ci**2*S2Beta*Sin(Phi + Phip))/2.))
+hp0
+#(*  Newtonian amplitude of GW Plus polarisation accurate to e^6 with \antenna pattern Fp multiplied. \[Phi] = (1+k)l, \[Phi]' = k l *)

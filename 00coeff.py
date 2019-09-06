@@ -42,3 +42,14 @@ C3Beta = Cos(3 * Beta);
 S4Beta = Sin(4 * Beta);
 C4Beta = Cos(4 * Beta);
 et0 = 0.1;                    #(* Eccentricity at lower cut-off frequency of the \detector, f0 i.e. et0 = et(f0) *)
+
+
+
+
+
+k = np.pi / 3
+l = np.pi / 5
+e = 0.3
+
+Phi = (1+k) * l 
+Phip = k * l

@@ -1,4 +1,4 @@
- Fp*((-5*C1Beta*Si*Cos(Phi))/4. - (C1Beta*Ci**2*Si*Cos(Phi))/4. + (9*C3Beta*Si*Cos(3*Phi))/4. + \
+hp05 = Fp*((-5*C1Beta*Si*Cos(Phi))/4. - (C1Beta*Ci**2*Si*Cos(Phi))/4. + (9*C3Beta*Si*Cos(3*Phi))/4. + \
 (9*C3Beta*Ci**2*Si*Cos(3*Phi))/4. - (5*S1Beta*Si*Sin(Phi))/4. - \
 (Ci**2*S1Beta*Si*Sin(Phi))/4. + (9*S3Beta*Si*Sin(3*Phi))/4. + \
 (9*Ci**2*S3Beta*Si*Sin(3*Phi))/4. + \
@@ -186,3 +186,7 @@ e**2*((3*C1Beta*Si*Cos(Phi))/2. - (C1Beta*Ci**2*Si*Cos(Phi))/2. - \
 (625*Ci**2*S3Beta*Si*Sin(5*Phi - 2*Phip))/32. + \
 (19*S3Beta*Si*Sin(Phi + 2*Phip))/32. + \
 (19*Ci**2*S3Beta*Si*Sin(Phi + 2*Phip))/32.))
+
+hp05
+#(* 0.5PN amplitude of GW  Plus polarisation accurate to e^6 with \
+# antenna pattern Fp multiplied *)

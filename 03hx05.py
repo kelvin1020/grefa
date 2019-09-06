@@ -1,5 +1,4 @@
-\
-Fc*(((3*Ci*S1Beta*Si)/2. - Ci*e**2*S1Beta*Si + (5*Ci*e**4*S1Beta*Si)/128. - \
+hx05 = Fc*(((3*Ci*S1Beta*Si)/2. - Ci*e**2*S1Beta*Si + (5*Ci*e**4*S1Beta*Si)/128. - \
 (13*Ci*e**6*S1Beta*Si)/384.)*Cos(Phi) + \
 ((-9*Ci*S3Beta*Si)/2. + 27*Ci*e**2*S3Beta*Si - (5319*Ci*e**4*S3Beta*Si)/128. + \
 (3141*Ci*e**6*S3Beta*Si)/128.)*Cos(3*Phi) + \
@@ -73,3 +72,6 @@ Sin(4*Phi - Phip) + \
 Sin(2*Phi + Phip) + \
 ((19*C3Beta*Ci*e**2*Si)/16. - (65*C3Beta*Ci*e**4*Si)/96. - 
 (19*C3Beta*Ci*e**6*Si)/6144.)*Sin(Phi + 2*Phip))
+
+hx05
+#(* 0.5PN amplitude of GW Cross polarisation accurate to e^6 with \antenna pattern Fc multiplied *)

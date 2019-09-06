@@ -1,9 +1,4 @@
-k = np.pi / 3
-l = np.pi / 5
-e = 0.3
 
-Phi = (1+k) * l 
-Phip = k * l
 
 hx0 = Fc*(4*Ci*S2Beta*Cos(2*Phi) - 4*C2Beta*Ci*Sin(2*Phi) + e**6*((-65*Ci*S2Beta*Cos(2*Phi))/72. - (11*Ci*S2Beta*Cos(4*Phi - 6*Phip))/45. + \
 (4096*Ci*S2Beta*Cos(8*Phi - 6*Phip))/45. - (11*Ci*S2Beta*Cos(2*Phi - 4*Phip))/120. - (2349*Ci*S2Beta*Cos(6*Phi - 4*Phip))/20. + \
