@@ -25,6 +25,8 @@ Sign = sp.functions.sign
 Log = np.log
 UnitStep = lambda x: np.heaviside(x, 1)  #unit step function, equals to 0 for x<0 and 1 for x >= 0
 
+Sum = sum
+
 
 #Coefficients
 Gamma = 0.5772156649;         #(* Euler-Gamma constant. Appears in 3PN corrections *) 
@@ -1066,22 +1068,36 @@ def xipn(j, n):
 	return ans
 
 
-
-
-
+num_prec = 15
 ####final function######
-hf0 = 0
-hf05 = 0
-hf1 = 0
+hf0 = \
+Sum([(xi(j, -2, hx0(e,Phi,Phip), hp0(e,Phi,Phip))*(j/2)**(2/3)*Exp(-sp.I* (fp(j, -2) + Pi/4))*UnitStep((j - (j - 2)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, -2)},n=num_prec) for j in range(1, 8+1)]) + \
+Sum([(xi(j, 2, hx0(e,Phi,Phip), hp0(e,Phi,Phip))*(j/2)**(2/3)*Exp(-sp.I* (fp(j, 2) + Pi/4))*UnitStep((j - (j + 2)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, 2)},n=num_prec) for j in range(1, 4+1)]) +\
+Sum([(xi(j, 0, hx0(e,Phi,Phip), hp0(e,Phi,Phip))*(j/2)**(2/3)*Exp(-sp.I* (fp(j, 0) + Pi/4))*UnitStep((j - j*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, 0)},n=num_prec) for j in range( 1, 6+1)]);   
+# (* Newtonian amplitude of the frequency domain GW waveform *)
 
 
+hf05 = \
+Sum([(xi(j, -1, hx05(e,Phi,Phip), hp05(e,Phi,Phip))*(j/2)**(1/3)*Exp(-sp.I* (fp(j, -1) + Pi/4))*UnitStep((j - (j - 1)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, -1)},n=num_prec) for j in range( 1, 7+1)]) + \
+Sum([(xi(j, 1, hx05(e,Phi,Phip), hp05(e,Phi,Phip))*(j/2)**(1/3)*Exp(-sp.I* (fp(j, 1) + Pi/4))*UnitStep((j - (j + 1)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, 1)},n=num_prec) for j in range(1, 5+1)]) + \
+Sum([(xi(j, -3, hx05(e,Phi,Phip), hp05(e,Phi,Phip))*(j/2)**(1/3)*Exp(-sp.I* (fp(j, -3) + Pi/4))*UnitStep((j - (j - 3)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, -3)},n=num_prec) for j in range( 1, 9+1)]) + \
+Sum([(xi(j, 3, hx05(e,Phi,Phip), hp05(e,Phi,Phip))*(j/2)**(1/3)*Exp(-sp.I* (fp(j, 3) + Pi/4))*UnitStep((j - (j + 3)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, 3)},n=num_prec) for j in range(1, 3+1)]); 
+#(* 0.5PN amplitude of the frequency domain GW waveform *)
 
+
+hf1 = \
+Sum([((xi(j, -2, hx1(e,Phi,Phip), hp1(e,Phi,Phip)) + xipn(j, -2))*Exp(-sp.I* (fp(j, -2) + Pi/4))*UnitStep((j - (j - 2)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, -2)},n=num_prec) for j in range( 1, 8+1)]) + \
+Sum([((xi(j, 2, hx1(e,Phi,Phip), hp1(e,Phi,Phip)) + xipn(j, 2))*Exp(-sp.I* (fp(j, 2) + Pi/4))*UnitStep((j - (j + 2)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, 2)},n=num_prec) for j in range(1, 4+1)]) + \
+Sum([((xi(j, 0, hx1(e,Phi,Phip), hp1(e,Phi,Phip)) + xipn(j, 0))*Exp(-sp.I* (fp(j, 0) + Pi/4))*UnitStep((j - j*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, 0)},n=num_prec) for j in range( 1, 6+1)]) + \
+Sum([(xi(j, -4, hx1(e,Phi,Phip), hp1(e,Phi,Phip))*Exp(-sp.I* (fp(j, -4) + Pi/4))*UnitStep((j - (j - 4)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, -4)},n=num_prec) for j in range( 1, 10+1)]) + \
+Sum([(xi(j, 4, hx1(e,Phi,Phip), hp1(e,Phi,Phip))*Exp(-sp.I* (fp(j, 4) + Pi/4))*UnitStep((j - (j + 4)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, 4)},n=num_prec) for j in range(1, 2+1)]); 
+#(* 1PN amplitude of the frequency domain GW waveform *)
 
 if __name__ == '__main__':
 
 
-	hf = (G**2*m**2*(hf0/(((f*G*m)/c**3)**1.1666666666666667*Pi**1.1666666666666667) + \
-	(delta*hf05)/(m*((f*G*m)/c**3)**0.8333333333333334*Pi**0.8333333333333334) + hf1/(Sqrt((f*G*m)/c**3)*Sqrt(Pi)))*Sqrt((5*Pi)/6.)*Sqrt(Eta))/\
+	hf = (G**2*m**2*(hf0/(((f*G*m)/c**3)**(7./6.)*Pi**(7./6.)) + \
+	(delta*hf05)/(m*((f*G*m)/c**3)**(5./6.)*Pi**(5./6.)) + hf1/(Sqrt((f*G*m)/c**3)*Sqrt(Pi)))*Sqrt((5*Pi)/6.)*Sqrt(Eta))/\
 	(8.*c**5*d)
 
 	# print(k(2))
@@ -1104,9 +1120,11 @@ if __name__ == '__main__':
 	# print(hx1(e, Phi, Phip))
 	# print(hp1(e, Phi, Phip))
 
-	e_val = 0.1
-	ans1 = (xi(1,2, hx1(e, Phi, Phip), hp1(e, Phi, Phip))).evalf(subs={e:e_val},n=15)
-	ans2 = (xipn(1,2)).evalf(subs={e:e_val},n=15)
+	# e_val = 0.1
+	# ans1 = (xi(1,2, hx1(e, Phi, Phip), hp1(e, Phi, Phip))).evalf(subs={e:e_val},n=num_prec)
+	# ans2 = (xipn(1,2)).evalf(subs={e:e_val},n=num_prec)
 
-	print(ans1, ans2)
+	# print(ans1, ans2)
+
+	print(hf0, hf05, hf1)
 	print(hf)
