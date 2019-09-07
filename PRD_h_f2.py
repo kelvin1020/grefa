@@ -48,7 +48,7 @@ def hf(f):
 	Eta = (m1*m2*msun**2)/m**2;   #(* Symmetric mass ratio *)
 	G = 6.67408e-11;              #(* Gravitational constant in S.I. units *)
 	c = 299792458;                #(* Speed of light in vacuum in S.I. units *)
-	d = 100*3.086e22;             #(* Distance to the binary in S.I. units *)
+	d = 100*3.086e22;             #(* Distance to the binary in S.I. units *)  #100 Mpc
 	f0 = 20.000;                  #(* Lower frequency cut-off of the GW detector *)
 
 
@@ -1099,7 +1099,7 @@ if __name__ == '__main__':
 	print("cores = %d"%core)
 	
 	#Variables
-	f = np.linspace(20, 200, 8);                      #(* GW or Fourier \frequency *)
+	f = np.linspace(20, 1024, core);                      #(* GW or Fourier \frequency *)
 	f = f.tolist()
 
 	time0 = time.time()
@@ -1108,4 +1108,4 @@ if __name__ == '__main__':
 	timet = time.time()
 
 	print("\nhf =", hf_ans)
-	print("cost%4.1fs"%(timet-time0))
+	print("cost %4.1fs"%(timet-time0))
