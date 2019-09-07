@@ -1,7 +1,8 @@
 import numpy as np
 import sympy as sp
+import time
 
-
+time0 = time.time()
 #Symbol
 Phi = sp.symbols("Phi")
 Phip = sp.symbols("Phip")
@@ -1039,8 +1040,6 @@ def hp1(e, Phi, Phip):
 	Sin(Phi + 3*Phip))
 	return ans
 
-
-
 ## xi, xipn ##
 def xi(j, n, cpol, ppol):
 	'''
@@ -1054,7 +1053,6 @@ def xi(j, n, cpol, ppol):
 	ans = sp.simplify(((1 - e**2)**1.75/Sqrt(1 + (73*e**2)/24. + (37*e**4)/96.)*sigrt*Exp(-sp.I * intan)).rewrite(sp.cos))
 	return ans
 
-
 def xipn(j, n):
 	'''
 	(* Function to compute 1PN contribution to Subscript[[Xi], j] (Fourier amplitudes) coming from Newtonian amplitude (hx0,hp0) due to \
@@ -1067,9 +1065,9 @@ def xipn(j, n):
 	ans = sp.simplify((((1 - e**2)**0.75*(15584. - 47820.*e**2 - 135611.*e**4 - 9645.*e**6))/(10752.*(1 + (73*e**2)/24. + (37*e**4)/96.)**1.5)*sigrt*Exp(-sp.I * intan)).rewrite(sp.cos))
 	return ans
 
-
+#### Newtonian amplitude of the frequency domain GW waveform######
 num_prec = 15
-####final function######
+
 hf0 = \
 Sum([(xi(j, -2, hx0(e,Phi,Phip), hp0(e,Phi,Phip))*(j/2)**(2/3)*Exp(-sp.I* (fp(j, -2) + Pi/4))*UnitStep((j - (j - 2)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, -2)},n=num_prec) for j in range(1, 8+1)]) + \
 Sum([(xi(j, 2, hx0(e,Phi,Phip), hp0(e,Phi,Phip))*(j/2)**(2/3)*Exp(-sp.I* (fp(j, 2) + Pi/4))*UnitStep((j - (j + 2)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, 2)},n=num_prec) for j in range(1, 4+1)]) +\
@@ -1084,7 +1082,6 @@ Sum([(xi(j, -3, hx05(e,Phi,Phip), hp05(e,Phi,Phip))*(j/2)**(1/3)*Exp(-sp.I* (fp(
 Sum([(xi(j, 3, hx05(e,Phi,Phip), hp05(e,Phi,Phip))*(j/2)**(1/3)*Exp(-sp.I* (fp(j, 3) + Pi/4))*UnitStep((j - (j + 3)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, 3)},n=num_prec) for j in range(1, 3+1)]); 
 #(* 0.5PN amplitude of the frequency domain GW waveform *)
 
-
 hf1 = \
 Sum([((xi(j, -2, hx1(e,Phi,Phip), hp1(e,Phi,Phip)) + xipn(j, -2))*Exp(-sp.I* (fp(j, -2) + Pi/4))*UnitStep((j - (j - 2)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, -2)},n=num_prec) for j in range( 1, 8+1)]) + \
 Sum([((xi(j, 2, hx1(e,Phi,Phip), hp1(e,Phi,Phip)) + xipn(j, 2))*Exp(-sp.I* (fp(j, 2) + Pi/4))*UnitStep((j - (j + 2)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, 2)},n=num_prec) for j in range(1, 4+1)]) + \
@@ -1093,12 +1090,15 @@ Sum([(xi(j, -4, hx1(e,Phi,Phip), hp1(e,Phi,Phip))*Exp(-sp.I* (fp(j, -4) + Pi/4))
 Sum([(xi(j, 4, hx1(e,Phi,Phip), hp1(e,Phi,Phip))*Exp(-sp.I* (fp(j, 4) + Pi/4))*UnitStep((j - (j + 4)*k(j)/(1 + k(j))) * ff - 2 * f)).evalf(subs={e:et(j, 4)},n=num_prec) for j in range(1, 2+1)]); 
 #(* 1PN amplitude of the frequency domain GW waveform *)
 
-if __name__ == '__main__':
 
 
-	hf = (G**2*m**2*(hf0/(((f*G*m)/c**3)**(7./6.)*Pi**(7./6.)) + \
-	(delta*hf05)/(m*((f*G*m)/c**3)**(5./6.)*Pi**(5./6.)) + hf1/(Sqrt((f*G*m)/c**3)*Sqrt(Pi)))*Sqrt((5*Pi)/6.)*Sqrt(Eta))/\
-	(8.*c**5*d)
 
-	print("hf0 =", hf0, "hf05 =", hf05, "hf1 =", hf1)
-	print("hf =", hf)
+hf = (G**2*m**2*(hf0/(((f*G*m)/c**3)**(7./6.)*Pi**(7./6.)) + \
+(delta*hf05)/(m*((f*G*m)/c**3)**(5./6.)*Pi**(5./6.)) + hf1/(Sqrt((f*G*m)/c**3)*Sqrt(Pi)))*Sqrt((5*Pi)/6.)*Sqrt(Eta))/\
+(8.*c**5*d)
+
+timet = time.time()
+
+print("hf0 =", hf0, "\nhf05 =", hf05, "\nhf1 =", hf1)
+print("\nhf =", hf)
+print("cost%4.1fs"%(timet-time0))
