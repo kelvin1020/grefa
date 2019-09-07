@@ -2,6 +2,20 @@ import numpy as np
 import sympy as sp
 import time
 
+
+# $Assumptions  
+#{{Fc, Fp, i, \[Beta], e, et0, \[Chi]} belongs to  Reals  
+#  0 <= e    <= 1 
+#  0 <= et0  <= 1  
+#       Chi  >  0 
+#  0 <= i    <= Pi/2 
+#  0 <= Beta <= Pi/2 
+# -1 <= Fc   <= 1 
+# -1 <= Fp   <= 1 
+#  0 <  Eta  <=0.25 
+#(* Assumptions to simplify computations *)   
+
+
 time0 = time.time()
 #Symbol
 Phi = sp.symbols("Phi")
