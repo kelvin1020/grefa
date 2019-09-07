@@ -1,7 +1,8 @@
 import numpy as np
 import sympy as sp
 import time
-
+from multiprocessing import Pool
+from multiprocessing import cpu_count
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------
 def hf(f):
@@ -115,7 +116,6 @@ def hf(f):
 		15256596481285635840*Eta*Chi**5.555555555555555 + 405971677516073760*Pi**2*Eta*Chi**5.555555555555555 - 109530449579765760*Eta**2*Chi**5.555555555555555))\
 		/(3.999037501734912e15*Chi**7.666666666666667))
 		return ans
-
 
 	def et(j, n):
 		'''
@@ -1065,12 +1065,14 @@ def hf(f):
 	def sumxi(j_, n_, hx_, hp_, j_index_):
 		ans = Sum([(xi(j, n_, hx_, hp_)*(j/2)**(j_index_/3)*Exp(-sp.I* (fp(j, n_) + Pi/4))*UnitStep((j - (j + n_)*k(j)/(1 + k(j))) * ff - 2 * f)).\
 			evalf(subs={e:et(j, n_)},n=num_prec) for j in range(1, j_+1)]) 
+		if ans==sp.nan:print(j_, n_,j_index_, ans)
 		return complex(ans)
 
 
 	def sumxi_xipn(j_, n_, hx_, hp_):
 		ans = Sum([((xi(j, n_, hx_, hp_) + xipn(j, n_))*Exp(-sp.I* (fp(j, n_) + Pi/4))*UnitStep((j - (j + n_)*k(j)/(1 + k(j))) * ff - 2 * f)).\
 			evalf(subs={e:et(j, n_)},n=num_prec) for j in range( 1, j_+1)]) 
+		if ans==sp.nan:print(j_, n_, ans)
 		return complex(ans)
 
 
@@ -1093,11 +1095,16 @@ def hf(f):
 
 
 if __name__ == '__main__':
-	#Variables
-	f = 100;                      #(* GW or Fourier \frequency *)
+	core = cpu_count()
+	print("cores = %d"%core)
 	
+	#Variables
+	f = np.linspace(20, 200, 8);                      #(* GW or Fourier \frequency *)
+	f = f.tolist()
+
 	time0 = time.time()
-	hf_ans = hf(f)
+	with Pool() as pool:
+		hf_ans = pool.map(hf, f)
 	timet = time.time()
 
 	print("\nhf =", hf_ans)
