@@ -4,24 +4,20 @@ import time
 from multiprocessing import Pool
 from multiprocessing import cpu_count
 
+#Constans and Coefficients
+Pi = np.pi 
+Gamma = 0.5772156649;         #(* Euler-Gamma constant. Appears in 3PN corrections *) 
+G = 6.67408e-11;              #(* Gravitational constant in S.I. units *)
+c = 299792458;                #(* Speed of light in vacuum in S.I. units *)
+msun = 1.989e30;              #(* Solar mass in S.I. units  *)
+f0 = 20.000;                  #(* Lower frequency cut-off of the GW detector *)
+
 #-----------------------------------------------------------------------------------------------------------------------------------------------
-def hf(f):
+def hf(f, **kwargs):
 	#Symbol
 	Phi = sp.symbols("Phi")
 	Phip = sp.symbols("Phip")
 	e = sp.symbols("e")
-
-	# $Assumptions  
-	#{{Fc, Fp, i, \[Beta], e, et0, \[Chi]} belongs to  Reals  
-	#  0 <= e    <= 1 
-	#  0 <= et0  <= 1  
-	#       Chi  >  0 
-	#  0 <= i    <= Pi/2 
-	#  0 <= Beta <= Pi/2 
-	# -1 <= Fc   <= 1 
-	# -1 <= Fp   <= 1 
-	#  0 <  Eta  <=0.25 
-	#(* Assumptions to simplify computations *)   
 
 	#Simple Functions
 	Cos = sp.cos
@@ -35,26 +31,29 @@ def hf(f):
 	Sum = sum
 
 	#Constans and Coefficients
-	Pi = np.pi 
+	# Pi = np.pi 
+	# Gamma = 0.5772156649;         #(* Euler-Gamma constant. Appears in 3PN corrections *) 
+	# G = 6.67408e-11;              #(* Gravitational constant in S.I. units *)
+	# c = 299792458;                #(* Speed of light in vacuum in S.I. units *)
+	# msun = 1.989e30;              #(* Solar mass in S.I. units  *)
+	# f0 = 20.000;                  #(* Lower frequency cut-off of the GW detector *)
 
-	Gamma = 0.5772156649;         #(* Euler-Gamma constant. Appears in 3PN corrections *) 
-	Fp = -0.5; Fc = 0.866025;     # (*  Choosing antenna patterns for \Theta=0^\(Degree), Phi= 30^\(Degree) and \(Psi)=30^\(Degree) *)
-	Phic = 0;                     #(* Orbital phase at coalescence *)
-	tc = 0;                       #(* \Time of coalescence *)
-	m1 = 10; m2 = 10;             #(* Mass of the binary \components in solar mass units *)
-	msun = 1.989e30;              #(* Solar mass in S.I. units  *)
+	Fp   = kwargs["Fp"] 
+	Fc   = kwargs["Fc"] 
+	Phic = kwargs["Phic"] 
+	tc   = kwargs["tc"]
+	m1   = kwargs["m1"]
+	m2   = kwargs["m2"]
+	i    = kwargs["i"]
+	Beta = kwargs["Beta"]
+	et0  = kwargs["et0"]
+	d    = kwargs["d"]
+	
 	m = (m1 + m2)* msun;          #(* Total mass of the binary in S.I. units *)
 	delta = (m1 - m2)* msun;      #(* Difference in the masses of the binary components in \S.I. units *)
 	Eta = (m1*m2*msun**2)/m**2;   #(* Symmetric mass ratio *)
-	G = 6.67408e-11;              #(* Gravitational constant in S.I. units *)
-	c = 299792458;                #(* Speed of light in vacuum in S.I. units *)
-	d = 100*3.086e22;             #(* Distance to the binary in S.I. units *)  #100 Mpc
-	f0 = 20.000;                  #(* Lower frequency cut-off of the GW detector *)
-
-
 	ff = c**3/(G*m*Pi*6**(3/2));  # (* Fourier frequency corresponding to second harmonic \of last stable orbit of the system *)
 	Chi = f/f0;                   #(* Ratio of Fourier frequency to the lower cut-off frequency \*)     
-	i = Pi/3; Beta = Pi/3;        #(* Choose any value for angles relating line of sight to the \orbital plane of the binary*)
 	Ci = Cos(i);                  #(* Defining variables as trigonometric functions of \angles iota and beta *)
 	Si = Sin(i);
 	S1Beta = Sin(Beta);
@@ -65,7 +64,6 @@ def hf(f):
 	C3Beta = Cos(3 * Beta);
 	S4Beta = Sin(4 * Beta);
 	C4Beta = Cos(4 * Beta);
-	et0 = 0.1;                    #(* Eccentricity at lower cut-off frequency of the \detector, f0 i.e. et0 = et(f0) *)
 	#-----------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -1095,16 +1093,51 @@ def hf(f):
 
 
 if __name__ == '__main__':
+
+	# $Assumptions  
+	#{{Fc, Fp, i, \[Beta], e, et0, \[Chi]} belongs to  Reals  
+	#  0 <= e    <= 1 
+	#  0 <= et0  <= 1  
+	#       Chi  >  0 
+	#  0 <= i    <= Pi/2 
+	#  0 <= Beta <= Pi/2 
+	# -1 <= Fc   <= 1 
+	# -1 <= Fp   <= 1 
+	#  0 <  Eta  <=0.25 
+	#(* Assumptions to simplify computations *)   
+
+
+	Fp = -0.5; 
+	Fc = 0.866025;     # (*  Choosing antenna patterns for \Theta=0^\(Degree), Phi= 30^\(Degree) and \(Psi)=30^\(Degree) *)
+	
+	Phic = 0;                     #(* Orbital phase at coalescence *)
+	tc = 0;                       #(* \Time of coalescence *)
+	
+	m1 = 10; 
+	m2 = 10;             #(* Mass of the binary \components in solar mass units *)
+	
+	d = 100*3.086e22;             #(* Distance to the binary in S.I. units *)  #100 Mpc
+	
+	i = Pi/3; 
+	Beta = Pi/3;        #(* Choose any value for angles relating line of sight to the \orbital plane of the binary*)
+	
+	et0 = 0.1;                    #(* Eccentricity at lower cut-off frequency of the \detector, f0 i.e. et0 = et(f0) *)
+
+
+	def hf_f(f):
+		return hf(f, Fp = Fp, Fc = Fc, Phic = Phic, tc = tc, \
+					 m1 = m1, m2 = m2, d  = d, i  = i, Beta = Beta, et0  = et0)
+
 	core = cpu_count()
 	print("cores = %d"%core)
 	
 	#Variables
-	f = np.linspace(20, 1024, core);                      #(* GW or Fourier \frequency *)
+	f = np.linspace(20, 100, core);                      #(* GW or Fourier \frequency *)
 	f = f.tolist()
 
 	time0 = time.time()
 	with Pool() as pool:
-		hf_ans = pool.map(hf, f)
+		hf_ans = pool.map(hf_f, f)
 	timet = time.time()
 
 	print("\nhf =", hf_ans)
