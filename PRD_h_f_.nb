@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    550006,      13336]
-NotebookOptionsPosition[    549038,      13306]
-NotebookOutlinePosition[    549379,      13321]
-CellTagsIndexPosition[    549336,      13318]
+NotebookDataLength[    550695,      13375]
+NotebookOptionsPosition[    549727,      13345]
+NotebookOutlinePosition[    550068,      13360]
+CellTagsIndexPosition[    550025,      13357]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -21,45 +21,50 @@ Notebook[{
 Cell[BoxData[{
  RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"$Assumptions", "=", 
-   RowBox[{"{", 
-    RowBox[{
+  RowBox[{
+   RowBox[{"$Assumptions", "=", 
+    RowBox[{"{", 
      RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-       "Fc", ",", "Fp", ",", "i", ",", "\[Beta]", ",", "e", ",", "et0", ",", 
-        "\[Chi]"}], "}"}], "\[Element]", "Reals"}], "  ", "&&", " ", 
-     RowBox[{"e", "\[GreaterEqual]", "0"}], "&&", 
-     RowBox[{"e", "\[LessEqual]", "1"}], "&&", 
-     RowBox[{"et0", "\[GreaterEqual]", "0"}], " ", "&&", 
-     RowBox[{"et0", "\[LessEqual]", "1"}], "&&", 
-     RowBox[{"\[Chi]", ">", "0"}], "&&", " ", 
-     RowBox[{"i", "\[LessEqual]", 
-      FractionBox["Pi", "2"]}], "&&", 
-     RowBox[{"\[Beta]", "\[LessEqual]", 
-      FractionBox["Pi", "2"]}], "&&", " ", 
-     RowBox[{"i", "\[GreaterEqual]", " ", "0"}], " ", "&&", " ", 
-     RowBox[{"\[Beta]", "\[GreaterEqual]", " ", "0"}], "&&", " ", 
-     RowBox[{"Fc", "\[LessEqual]", "1"}], "&&", 
-     RowBox[{"Fp", "\[LessEqual]", "1"}], "&&", " ", 
-     RowBox[{"Fc", "\[GreaterEqual]", 
-      RowBox[{"-", "1"}]}], " ", "&&", " ", 
-     RowBox[{"Fp", "\[GreaterEqual]", 
-      RowBox[{"-", "1"}]}], "&&", 
-     RowBox[{"\[Eta]", ">", "0"}], "&&", 
-     RowBox[{"\[Eta]", "\[LessEqual]", "0.25"}]}], "}"}]}], ";", " ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "Fc", ",", "Fp", ",", "i", ",", "\[Beta]", ",", "e", ",", "et0", ",", 
+         "\[Chi]"}], "}"}], "\[Element]", "Reals"}], "  ", "&&", " ", 
+      RowBox[{"e", "\[GreaterEqual]", "0"}], "&&", 
+      RowBox[{"e", "\[LessEqual]", "1"}], "&&", 
+      RowBox[{"et0", "\[GreaterEqual]", "0"}], " ", "&&", 
+      RowBox[{"et0", "\[LessEqual]", "1"}], "&&", 
+      RowBox[{"\[Chi]", ">", "0"}], "&&", " ", 
+      RowBox[{"i", "\[LessEqual]", 
+       FractionBox["Pi", "2"]}], "&&", 
+      RowBox[{"\[Beta]", "\[LessEqual]", 
+       FractionBox["Pi", "2"]}], "&&", " ", 
+      RowBox[{"i", "\[GreaterEqual]", " ", "0"}], " ", "&&", " ", 
+      RowBox[{"\[Beta]", "\[GreaterEqual]", " ", "0"}], "&&", " ", 
+      RowBox[{"Fc", "\[LessEqual]", "1"}], "&&", 
+      RowBox[{"Fp", "\[LessEqual]", "1"}], "&&", " ", 
+      RowBox[{"Fc", "\[GreaterEqual]", 
+       RowBox[{"-", "1"}]}], " ", "&&", " ", 
+      RowBox[{"Fp", "\[GreaterEqual]", 
+       RowBox[{"-", "1"}]}], "&&", 
+      RowBox[{"\[Eta]", ">", "0"}], "&&", 
+      RowBox[{"\[Eta]", "\[LessEqual]", "0.25"}]}], "}"}]}], ";"}], " ", 
   RowBox[{"(*", " ", 
    RowBox[{"Assumptions", " ", "to", " ", "simplify", " ", "computations"}], 
-   " ", "*)"}], "   ", "\[IndentingNewLine]", 
-  RowBox[{"\[Gamma]", "=", "0.5772156649"}], ";", " ", 
+   " ", "*)"}], "   "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Gamma]", "=", "0.5772156649"}], ";"}], " ", 
   RowBox[{"(*", " ", 
    RowBox[{"Euler", "-", 
     RowBox[{"Gamma", " ", 
      RowBox[{"constant", ".", " ", "Appears"}], " ", "in", " ", "3", "PN", 
-     " ", "corrections"}]}], " ", "*)"}], " ", "\[IndentingNewLine]", 
-  RowBox[{"Fp", "=", 
-   RowBox[{"-", "0.5"}]}], ";", 
-  RowBox[{"Fc", "=", "0.866025"}], ";", "   ", 
+     " ", "corrections"}]}], " ", "*)"}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Fp", "=", 
+    RowBox[{"-", "0.5"}]}], ";", 
+   RowBox[{"Fc", "=", "0.866025"}], ";"}], "   ", 
   RowBox[{"(*", "  ", 
    RowBox[{
     RowBox[{
@@ -71,124 +76,155 @@ Cell[BoxData[{
      RowBox[{
       RowBox[{
        SuperscriptBox["30", "\[Degree]"], " ", "and", " ", "\[Psi]"}], "=", 
-      SuperscriptBox["30", "\[Degree]"]}]}]}], " ", "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"\[Phi]c", "=", "0"}], ";", "     ", 
+      SuperscriptBox["30", "\[Degree]"]}]}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Phi]c", "=", "0"}], ";"}], "     ", 
   RowBox[{"(*", " ", 
    RowBox[{"Orbital", " ", "phase", " ", "at", " ", "coalescence"}], " ", 
-   "*)"}], "\[IndentingNewLine]", 
-  RowBox[{"tc", "=", "0"}], ";", "      ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"tc", "=", "0"}], ";"}], "      ", 
   RowBox[{"(*", " ", 
-   RowBox[{"Time", " ", "of", " ", "coalescence"}], " ", "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"m1", "=", "10"}], ";", 
-  RowBox[{"m2", "=", "10"}], ";", "    ", 
+   RowBox[{"Time", " ", "of", " ", "coalescence"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"m1", "=", "10"}], ";", 
+   RowBox[{"m2", "=", "10"}], ";"}], "    ", 
   RowBox[{"(*", " ", 
    RowBox[{
    "Mass", " ", "of", " ", "the", " ", "binary", " ", "components", " ", "in",
-     " ", "solar", " ", "mass", " ", "units"}], " ", "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"msun", "=", 
-   RowBox[{"1.989", "\[Times]", 
-    SuperscriptBox["10", "30"]}]}], ";", "      ", 
+     " ", "solar", " ", "mass", " ", "units"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"msun", "=", 
+    RowBox[{"1.989", "\[Times]", 
+     SuperscriptBox["10", "30"]}]}], ";"}], "      ", 
   RowBox[{"(*", " ", 
    RowBox[{"Solar", " ", "mass", " ", "in", " ", 
-    RowBox[{"S", ".", "I", ".", " ", "units"}]}], "  ", "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"m", "=", 
-   RowBox[{
-    RowBox[{"(", 
-     RowBox[{"m1", "+", "m2"}], ")"}], "*", "msun"}]}], ";", "       ", 
+    RowBox[{"S", ".", "I", ".", " ", "units"}]}], "  ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"m", "=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"m1", "+", "m2"}], ")"}], "*", "msun"}]}], ";"}], "       ", 
   RowBox[{"(*", " ", 
    RowBox[{
    "Total", " ", "mass", " ", "of", " ", "the", " ", "binary", " ", "in", " ", 
-    RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"delta", "=", 
-   RowBox[{
-    RowBox[{"(", 
-     RowBox[{"m1", "-", "m2"}], ")"}], "*", "msun"}]}], ";", "      ", 
+    RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"delta", "=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"m1", "-", "m2"}], ")"}], "*", "msun"}]}], ";"}], "      ", 
   RowBox[{"(*", " ", 
    RowBox[{
    "Difference", " ", "in", " ", "the", " ", "masses", " ", "of", " ", "the", 
     " ", "binary", " ", "components", " ", "in", " ", 
-    RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"\[Eta]", "=", 
-   RowBox[{
-    RowBox[{"(", 
-     RowBox[{"m1", "*", "m2", "*", 
-      SuperscriptBox["msun", "2"]}], ")"}], "/", 
-    SuperscriptBox["m", "2"]}]}], ";", "      ", 
+    RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Eta]", "=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"m1", "*", "m2", "*", 
+       SuperscriptBox["msun", "2"]}], ")"}], "/", 
+     SuperscriptBox["m", "2"]}]}], ";"}], "      ", 
   RowBox[{"(*", " ", 
-   RowBox[{"Symmetric", " ", "mass", " ", "ratio"}], " ", "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"G", "=", 
-   RowBox[{"6.67408", "\[Times]", 
-    SuperscriptBox["10", 
-     RowBox[{"-", "11"}]]}]}], ";", "    ", 
+   RowBox[{"Symmetric", " ", "mass", " ", "ratio"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"G", "=", 
+    RowBox[{"6.67408", "\[Times]", 
+     SuperscriptBox["10", 
+      RowBox[{"-", "11"}]]}]}], ";"}], "    ", 
   RowBox[{"(*", " ", 
    RowBox[{"Gravitational", " ", "constant", " ", "in", " ", 
-    RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"c", "=", "299792458"}], ";", "           ", 
+    RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"c", "=", "299792458"}], ";"}], "           ", 
   RowBox[{"(*", " ", 
    RowBox[{
    "Speed", " ", "of", " ", "light", " ", "in", " ", "vacuum", " ", "in", " ", 
-    RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"d", "=", 
-   RowBox[{"100", "*", "3.086", "*", 
-    SuperscriptBox["10", "22"]}]}], ";", "    ", 
+    RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"d", "=", 
+    RowBox[{"100", "*", "3.086", "*", 
+     SuperscriptBox["10", "22"]}]}], ";"}], "    ", 
   RowBox[{"(*", " ", 
    RowBox[{"Distance", " ", "to", " ", "the", " ", "binary", " ", "in", " ", 
-    RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"f0", "=", "20.000"}], ";", "    ", 
+    RowBox[{"S", ".", "I", ".", " ", "units"}]}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f0", "=", "20.000"}], ";"}], "    ", 
   RowBox[{"(*", " ", 
    RowBox[{
     RowBox[{"Lower", " ", "frequency", " ", "cut"}], "-", 
     RowBox[{"off", " ", "of", " ", "the", " ", "GW", " ", "detector"}]}], " ",
-    "*)"}], "\[IndentingNewLine]", 
-  RowBox[{"ff", "=", 
-   FractionBox[
-    SuperscriptBox["c", "3"], 
-    RowBox[{"(", 
-     RowBox[{"G", " ", "m", " ", "\[Pi]", " ", 
-      SuperscriptBox["6", 
-       RowBox[{"3", "/", "2"}]]}], ")"}]]}], ";", "      ", 
+    "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ff", "=", 
+    FractionBox[
+     SuperscriptBox["c", "3"], 
+     RowBox[{"(", 
+      RowBox[{"G", " ", "m", " ", "\[Pi]", " ", 
+       SuperscriptBox["6", 
+        RowBox[{"3", "/", "2"}]]}], ")"}]]}], ";"}], "      ", 
   RowBox[{"(*", " ", 
    RowBox[{
    "Fourier", " ", "frequency", " ", "corresponding", " ", "to", " ", 
     "second", " ", "harmonic", " ", "of", " ", "last", " ", "stable", " ", 
-    "orbit", " ", "of", " ", "the", " ", "system"}], " ", "*)"}], 
-  "\[IndentingNewLine]", 
-  RowBox[{"\[Chi]", "=", 
-   RowBox[{"f", "/", "f0"}]}], ";", "   ", 
+    "orbit", " ", "of", " ", "the", " ", "system"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Chi]", "=", 
+    RowBox[{"f", "/", "f0"}]}], ";"}], "   ", 
   RowBox[{"(*", " ", 
    RowBox[{
     RowBox[{
     "Ratio", " ", "of", " ", "Fourier", " ", "frequency", " ", "to", " ", 
      "the", " ", "lower", " ", "cut"}], "-", 
-    RowBox[{"off", " ", "frequency"}]}], " ", "*)"}], "     ", 
-  "\[IndentingNewLine]", 
-  RowBox[{"i", "=", 
-   RowBox[{"\[Pi]", "/", "3"}]}], ";", 
-  RowBox[{"\[Beta]", "=", 
-   RowBox[{"\[Pi]", "/", "3"}]}], ";", "    ", 
+    RowBox[{"off", " ", "frequency"}]}], " ", "*)"}], 
+  "     "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"i", "=", 
+    RowBox[{"\[Pi]", "/", "3"}]}], ";", 
+   RowBox[{"\[Beta]", "=", 
+    RowBox[{"\[Pi]", "/", "3"}]}], ";"}], "    ", 
   RowBox[{"(*", " ", 
    RowBox[{
    "Choose", " ", "any", " ", "value", " ", "for", " ", "angles", " ", 
     "relating", " ", "line", " ", "of", " ", "sight", " ", "to", " ", "the", 
     " ", "orbital", " ", "plane", " ", "of", " ", "the", " ", "binary"}], 
-   "*)"}], "\[IndentingNewLine]", 
-  RowBox[{"Ci", "=", 
-   RowBox[{"Cos", "[", "i", "]"}]}], ";", "    ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Ci", "=", 
+    RowBox[{"Cos", "[", "i", "]"}]}], ";"}], "    ", 
   RowBox[{"(*", " ", 
    RowBox[{
    "Defining", " ", "variables", " ", "as", " ", "trigonometric", " ", 
     "functions", " ", "of", " ", "angles", " ", "iota", " ", "and", " ", 
-    "beta"}], " ", "*)"}], "\[IndentingNewLine]", 
+    "beta"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
   RowBox[{"Si", "=", 
    RowBox[{"Sin", "[", "i", "]"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
@@ -239,7 +275,8 @@ Cell[BoxData[{
      RowBox[{"et", 
       RowBox[{"(", "f0", ")"}]}]}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"f", "=", " ", "100"}], ";", "   ", 
+  RowBox[{
+   RowBox[{"f", "=", " ", "100"}], ";"}], "   ", 
   RowBox[{"(*", " ", 
    RowBox[{"GW", " ", "or", " ", "Fourier", " ", "frequency"}], " ", 
    "*)"}]}]}], "Input",
@@ -261,7 +298,7 @@ Cell[BoxData[{
    3.7688019955980787`*^9}, {3.777075137448381*^9, 3.777075139544484*^9}, {
    3.777075179341151*^9, 3.77707520399442*^9}, {3.777075481539976*^9, 
    3.777075485005513*^9}, 3.777075675703175*^9, {3.777075715990159*^9, 
-   3.777075746655623*^9}},
+   3.777075746655623*^9}, {3.777088867690007*^9, 3.7770888965386543`*^9}},
  ExpressionUUID -> "6cedec8a-23c2-4841-b1a2-f6965672bc41"],
 
 Cell[BoxData[
@@ -13297,15 +13334,17 @@ Cell[BoxData[
  ExpressionUUID -> "4c55e478-759f-4eed-a7cb-5863480fd5c2"],
 
 Cell[BoxData[
- RowBox[{"4.260411966815196`*^-30", "+", 
-  RowBox[{"5.9570013936401706`*^-30", " ", "\[ImaginaryI]"}]}]], "Output",
- CellChangeTimes->{3.7763827491049757`*^9, 3.777075692071003*^9, 
-  3.777075726635111*^9},
+ RowBox[{
+  RowBox[{"-", "6.65060750930051`*^-24"}], "-", 
+  RowBox[{"5.620629702663063`*^-24", " ", "\[ImaginaryI]"}]}]], "Output",
+ CellChangeTimes->{
+  3.7763827491049757`*^9, 3.777075692071003*^9, 3.777075726635111*^9, {
+   3.7770888496032248`*^9, 3.777088904146119*^9}, 3.777090078279223*^9},
  ExpressionUUID -> "c019e457-b5be-4b44-93e6-62abece5b779"]
 }, Open  ]]
 },
 WindowSize->{1380, 753},
-WindowMargins->{{Automatic, 133}, {96, Automatic}},
+WindowMargins->{{Automatic, 133}, {36, Automatic}},
 FrontEndVersion->"11.0 for Linux x86 (64-bit) (September 21, 2016)",
 StyleDefinitions->"Default.nb"
 ]
@@ -13320,23 +13359,23 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 10015, 244, 821, "Input"],
-Cell[10576, 266, 14216, 357, 572, "Input"],
-Cell[24795, 625, 30572, 783, 1180, "Input"],
-Cell[55370, 1410, 90679, 2173, 3136, "Input"],
-Cell[146052, 3585, 71018, 1809, 2783, "Input"],
-Cell[217073, 5396, 125597, 3047, 5253, "Input"],
-Cell[342673, 8445, 60460, 1431, 3776, "Input"],
-Cell[403136, 9878, 5427, 128, 238, "Input"],
-Cell[408566, 10008, 5270, 135, 291, "Input"],
-Cell[413839, 10145, 20501, 481, 958, "Input"],
-Cell[434343, 10628, 94551, 2132, 5913, "Input"],
-Cell[528897, 12762, 4668, 123, 172, "Input"],
-Cell[533568, 12887, 6057, 161, 219, "Input"],
-Cell[539628, 13050, 6898, 185, 253, "Input"],
+Cell[558, 20, 10614, 281, 821, "Input"],
+Cell[11175, 303, 14216, 357, 572, "Input"],
+Cell[25394, 662, 30572, 783, 1180, "Input"],
+Cell[55969, 1447, 90679, 2173, 3136, "Input"],
+Cell[146651, 3622, 71018, 1809, 2783, "Input"],
+Cell[217672, 5433, 125597, 3047, 5253, "Input"],
+Cell[343272, 8482, 60460, 1431, 3776, "Input"],
+Cell[403735, 9915, 5427, 128, 261, "Input"],
+Cell[409165, 10045, 5270, 135, 291, "Input"],
+Cell[414438, 10182, 20501, 481, 958, "Input"],
+Cell[434942, 10665, 94551, 2132, 5913, "Input"],
+Cell[529496, 12799, 4668, 123, 172, "Input"],
+Cell[534167, 12924, 6057, 161, 219, "Input"],
+Cell[540227, 13087, 6898, 185, 253, "Input"],
 Cell[CellGroupData[{
-Cell[546551, 13239, 2188, 57, 106, "Input"],
-Cell[548742, 13298, 280, 5, 67, "Output"]
+Cell[547150, 13276, 2188, 57, 106, "Input"],
+Cell[549341, 13335, 370, 7, 67, "Output"]
 }, Open  ]]
 }
 ]
